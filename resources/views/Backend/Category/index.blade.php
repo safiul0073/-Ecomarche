@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h1 class="text-primary">Category</h1>
-            <a href="{{}}" class="btn btn-outline-primary">Add Category</a>
+            <a href="{{route('category.create')}}" class="btn btn-outline-primary">Add Category</a>
         </div>
         <div class="card-body">
             <table class="table table-dark table-striped">
@@ -23,18 +23,19 @@
                 <tbody>
 
                     {{-- {{dd($users)}} --}}
-                    {{-- @foreach ($users as $user)
+                    @foreach ($categorys as $key => $category)
                     <tr>
                 
-                        <td scope="raw">{{$user->id}}</td>
-                        <td scope="raw">{{$user->username}}</td>
-                        <td scope="raw">{{$user->email}}</td>
-                        <td scope="raw">{{$user->role_users->user_id}}</td>
+                        <td scope="raw">{{$key+1}}</td>
+                        <td scope="raw">{{$category->name}}</td>
+                        <td scope="raw">{{$category->status == 1 ? "Active" : "UnActive"}}</td>
+                        
                         <td scope="raw">
-                            <a href="{{route('deleteUser',$user->id)}}">Delete</a>
+                            {{-- <a href="{{route('deleteUser',$user->id)}}">Delete</a> --}}
+                            <a href="{{route('category.edit', $category->id)}}">edit</a>
                         </td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                     
                 </tbody>
             </table>

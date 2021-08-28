@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Category;
 
 use App\Models\Category;
+use App\Repositories\Category\CategoryInterface;
 
-class CategoryRepository implements CategoryInterface
+class categoryRepository implements CategoryInterface
 {
     protected $model;
     
@@ -15,7 +16,7 @@ class CategoryRepository implements CategoryInterface
 
    
      public function getAll() {
-        return $this->model->all();
+        return $this->model->orderBy('id', 'desc')->get();
     } 
 
     public function getOneById(int $id) {

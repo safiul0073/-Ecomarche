@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')}}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
     <link href="{{asset('https://use.fontawesome.com/releases/v5.0.6/css/all.css')}}" rel="stylesheet">
+    @stack('css')
 </head>
 <body>
     <div class="page-wrapper chiller-theme toggled">
@@ -29,7 +30,7 @@
       <!-- sidebar-wrapper  -->
       <main class="page-content">
         <div class="container-fluid">
- 
+
             @yield('content')
         </div>
       </main>
@@ -42,6 +43,7 @@
         <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')}}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
             <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+            @stack('js')
     </body>
 
 

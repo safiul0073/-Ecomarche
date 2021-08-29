@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
-use App\Repositories\Category\CategoryRepository;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $categroy;
-    public function __construct (CategoryRepository $categoryRepository) {
-        $this->categroy = $categoryRepository;
-    }
-
     public function index()
     {
-        $categorys = $this->categroy->getAll();
-        return view('Backend.Category.index', compact('categorys'));
+        $brands     = Brand::all();
+        return view('Backend.brand.index',compact('brands'));
     }
 
     /**
@@ -31,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Backend.Category.create');
+        return view('Backend.brand.create');
     }
 
     /**
@@ -42,23 +37,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|max:255',
             'status' => 'required',
         ]);
-        // dd($request->all());
-        $att = ['name' => $request->name, 'status' => $request->status];
-        Category::create($request->all());
-        return redirect()->route('category.index');
+        Brand::create($request->all());
+        return redirect()->route('brand.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
         //
     }
@@ -66,41 +60,38 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,Category $category)
+    public function edit($id)
     {
-
-        $category = Category::find($id);
-
-        return view('Backend.Category.create', compact('category'));
+        $brand = Brand::findOrFail($id);
+        return view('Backend.brand.create',compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $att = ['name' => $request->name, 'status' => $request->status];
-        Category::find($id)->update($att);
-
-        return redirect()->route('category.index');
+        $brand = ['name' => $request->name,'status' => $request->status];
+        Brand::find($id)->update($brand);
+        return redirect()->route('brand.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
+        Brand::findOrFail($id)->delete();
         return redirect()->back();
     }
 }

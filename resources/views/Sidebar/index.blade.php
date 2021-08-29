@@ -69,7 +69,7 @@
             <span>Category</span>
             <span class="badge badge-pill badge-danger">3</span>
           </a>
-          <div class="sidebar-submenu">
+          {{-- <div class="sidebar-submenu">
             <ul>
               <li>
                 <a href="#">Products
@@ -83,14 +83,15 @@
                 <a href="#">Credit cart</a>
               </li>
             </ul>
-          </div>
+          </div> --}}
         </li>
-        <li class="sidebar-dropdown">
-          <a href="#">
+
+        <li class="sidebar">
+          <a href="{{route('brand.index')}}">
             <i class="far fa-gem"></i>
-            <span>Components</span>
+            <span>Brand</span>
           </a>
-          <div class="sidebar-submenu">
+          {{-- <div class="sidebar-submenu">
             <ul>
               <li>
                 <a href="#">General</a>
@@ -108,7 +109,7 @@
                 <a href="#">Forms</a>
               </li>
             </ul>
-          </div>
+          </div> --}}
         </li>
         <li class="sidebar-dropdown">
           <a href="#">

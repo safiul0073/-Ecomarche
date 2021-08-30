@@ -22,7 +22,7 @@ Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('ca
 Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-//brand section here...
+//brand section here......
 Route::get('/brand/index', [BrandController::class, 'index'])->name('brand.index');
 Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
 Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\StoreController;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,13 @@ Route::post('/slider/store',[SliderController::class, 'store'])->name('slider.st
 Route::get('/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
 Route::post('/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
 Route::delete('/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
+
+// Store section here...
+Route::get('/store/index',[StoreController::class, 'index'])->name('store.index');
+Route::get('/store/create',[StoreController::class, 'create'])->name('store.create');
+Route::post('/store/store',[StoreController::class, 'store'])->name('store.store');
+
+
 
 
 

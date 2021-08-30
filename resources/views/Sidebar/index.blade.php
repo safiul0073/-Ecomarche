@@ -117,6 +117,12 @@
               <span>Slider</span>
             </a>
         </li>
+        <li class="sidebar">
+            <a href="{{route('store.index')}}">
+              <i class="far fa-gem"></i>
+              <span>Store</span>
+            </a>
+        </li>
         <li class="sidebar-dropdown">
           <a href="#">
             <i class="fa fa-chart-line"></i>

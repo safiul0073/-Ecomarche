@@ -111,6 +111,12 @@
             </ul>
           </div> --}}
         </li>
+        <li class="sidebar">
+            <a href="{{route('slider.index')}}">
+              <i class="far fa-gem"></i>
+              <span>Slider</span>
+            </a>
+        </li>
         <li class="sidebar-dropdown">
           <a href="#">
             <i class="fa fa-chart-line"></i>

@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Role;
 use App\Models\Store;
 use App\Observers\BrandOvserver;
 use App\Observers\CatergoryObserver;
+use App\Observers\RoleObserver;
 use App\Observers\StoreObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -36,5 +38,6 @@ class EventServiceProvider extends ServiceProvider
         Category::observe(CatergoryObserver::class);
         Brand::observe(BrandOvserver::class);
         Store::observe(StoreObserver::class);
+        Role::observe(RoleObserver::class);
     }
 }

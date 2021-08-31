@@ -164,6 +164,22 @@
         <li class="header-menu">
           <span>Extra</span>
         </li>
+        <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-globe"></i>
+              <span>Employ Management</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{{route('role.index')}}">Role</a>
+                </li>
+                <li>
+                  <a href="#">Open street map</a>
+                </li>
+              </ul>
+            </div>
+          </li>
         <li>
           <a href="#">
             <i class="fa fa-book"></i>

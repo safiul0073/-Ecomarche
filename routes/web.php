@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StoreController;
+use App\Models\Role;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +50,18 @@ Route::post('/store/store',[StoreController::class, 'store'])->name('store.store
 Route::get('/store/edit/{id}',[StoreController::class, 'edit'])->name('store.edit');
 Route::post('/store/update/{id}',[StoreController::class, 'update'])->name('store.update');
 Route::delete('/store/delete/{id}',[StoreController::class, 'destroy'])->name('store.destroy');
+
+// Role section here...
+Route::get('/role/index', [RoleController::class, 'index'])->name('role.index');
+Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
+Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
+Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+Route::post('/role/update/{id}', [RoleController::class, 'update'])->name('role.update');
+Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+
+
+
 
 
 

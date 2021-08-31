@@ -45,6 +45,11 @@ Route::delete('/slider/delete/{id}', [SliderController::class, 'destroy'])->name
 Route::get('/store/index',[StoreController::class, 'index'])->name('store.index');
 Route::get('/store/create',[StoreController::class, 'create'])->name('store.create');
 Route::post('/store/store',[StoreController::class, 'store'])->name('store.store');
+Route::get('/store/edit/{id}',[StoreController::class, 'edit'])->name('store.edit');
+Route::post('/store/update/{id}',[StoreController::class, 'update'])->name('store.update');
+Route::delete('/store/delete/{id}',[StoreController::class, 'destroy'])->name('store.destroy');
+
+
 
 
 

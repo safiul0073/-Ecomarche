@@ -33,14 +33,14 @@
                             <td> {{$store->city}}</td>
                             <td> {{Str::limit($store->desc,30)}} </td>
                             <td> {{$store->status == 1 ? 'active' : ''}} </td>
-                            {{-- <td>
-                                <a class="btn btn-info waves-effect" href="{{route('slider.edit',$slider->id)}}">edit</a>
-                                <button class="btn btn-danger waves-effect" onclick="deleteSlider({{ $slider->id }})">delete</button>
-                                <form id="delete-form-{{ $slider->id }}" action="{{route('slider.destroy',$slider->id)}}" method="POST" style="display: none">
+                            <td>
+                                <a class="btn btn-info waves-effect" href="{{route('store.edit',$store->id)}}">edit</a>
+                                <button class="btn btn-danger waves-effect" onclick="deleteStore({{ $store->id }})">delete</button>
+                                <form id="delete-form-{{ $store->id }}" action="{{route('store.destroy',$store->id)}}" method="POST" style="display: none">
                                     @csrf
                                     @method('DELETE')
                                 </form>
-                            </td> --}}
+                            </td>
 
                         </tr>
                     @endforeach
@@ -64,7 +64,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-    function deleteSlider(id){
+    function deleteStore(id){
 
         const swalWithBootstrapButtons = Swal.mixin({
 customClass: {

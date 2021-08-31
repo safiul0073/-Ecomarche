@@ -175,7 +175,7 @@
                   <a href="{{route('role.index')}}">Role</a>
                 </li>
                 <li>
-                  <a href="#">Open street map</a>
+                  <a href="{{ route('user.index')}}">User Panal</a>
                 </li>
               </ul>
             </div>

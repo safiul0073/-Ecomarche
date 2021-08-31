@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\UserController;
 use App\Models\Role;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,13 @@ Route::post('/role/store', [RoleController::class, 'store'])->name('role.store')
 Route::get('/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
 Route::post('/role/update/{id}', [RoleController::class, 'update'])->name('role.update');
 Route::delete('/role/delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+// employ user section here...
+Route::get('/user/index', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+
+
 
 
 

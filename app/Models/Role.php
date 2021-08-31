@@ -11,4 +11,8 @@ class Role extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [ 'title', 'slug', 'status' ];
+
+    public function users(){
+        return $this->belongsTo(User::class)->withTimestamps();
+    }
 }

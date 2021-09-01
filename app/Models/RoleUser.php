@@ -10,6 +10,6 @@ class RoleUser extends Model
     use HasFactory;
     protected $fillable = [ 'user_id', 'role_id'];
     public function users(){
-        return $this->belongsTo(User::class)->withTimestamps();
+        return $this->belongsTo(User::class);
     }
 }

@@ -33,7 +33,7 @@
                             <td> {{$user->email}}</td>
                             <td> {{$user->phone}}</td>
                             <td> {{Str::limit($user->address,30)}} </td>
-                            <td> {{}}</td>
+                            {{-- <td> {{}}</td> --}}
                             <td> {{$user->status == 1 ? 'active' : ''}} </td>
                             <td>
                                 {{-- <a class="btn btn-info waves-effect" href="{{route('store.edit',$store->id)}}">edit</a>

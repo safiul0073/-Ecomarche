@@ -20,8 +20,8 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        $role = ['title' => $request->title];
-         Role::create($role);
+        $role = ['role_id' => $request->role, 'status' => 1];
+         
          $user = [
 
              'name'     => $request->name,
@@ -31,8 +31,11 @@ class UserController extends Controller
              'status'   => $request->status,
              'password' => $request->password
          ];
-         User::create($user);
-         return view('Backend.user.index');
+         $user = User::create($user);
+         
+         $roles = $user->role_users()->create($role);
+         dd($roles);
+         return redirect()->route('user.index');
 
     }
 }

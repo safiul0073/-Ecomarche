@@ -58,7 +58,7 @@
 
                             <div class="col-md-6">
                                 {{-- <input type="text" class="form-control @error('text') is-invalid @enderror" name="text"> --}}
-                                <textarea class="form-control @error('text') is-invalid @enderror" name="text" id="" cols="30" rows="2"></textarea>
+                                <textarea name="address" class="form-control @error('text') is-invalid @enderror" id="" cols="30" rows="2"></textarea>
 
                                 @error('text')
                                     <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="roles[]" id="">
+                                <select class="form-control" name="role" id="">
                                     @foreach ($roles as $role )
                                     <option value="{{$role->id}}">{{$role->title}}</option>
 

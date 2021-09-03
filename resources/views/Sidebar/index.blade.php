@@ -42,7 +42,7 @@
           <span>General</span>
         </li>
         <li class="sidebar-dropdown">
-          <a href="#">
+          <a href="{{ route('dashboard')}}">
             <i class="fa fa-tachometer-alt"></i>
             <span>Dashboard</span>
             <span class="badge badge-pill badge-warning">New</span>

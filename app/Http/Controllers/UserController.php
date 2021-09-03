@@ -34,7 +34,6 @@ class UserController extends Controller
          $user = User::create($user);
          
          $roles = $user->role_users()->create($role);
-         dd($roles);
          return redirect()->route('user.index');
 
     }

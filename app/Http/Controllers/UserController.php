@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function store(Request $request){
         $role = ['role_id' => $request->role, 'status' => 1];
-         
+
          $user = [
 
              'name'     => $request->name,
@@ -32,9 +32,14 @@ class UserController extends Controller
              'password' => $request->password
          ];
          $user = User::create($user);
-         
+
          $roles = $user->role_users()->create($role);
          return redirect()->route('user.index');
 
+    }
+
+    public function edit($id){
+        $user = User::find($id);
+        return view('Backend.user.edit',compact('user'));
     }
 }

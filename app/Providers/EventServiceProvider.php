@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Role;
 use App\Models\Store;
 use App\Observers\BrandOvserver;
 use App\Observers\CatergoryObserver;
+use App\Observers\ProductObserver;
 use App\Observers\RoleObserver;
 use App\Observers\StoreObserver;
 use Illuminate\Auth\Events\Registered;
@@ -39,5 +41,6 @@ class EventServiceProvider extends ServiceProvider
         Brand::observe(BrandOvserver::class);
         Store::observe(StoreObserver::class);
         Role::observe(RoleObserver::class);
+        Product::observe(ProductObserver::class);
     }
 }

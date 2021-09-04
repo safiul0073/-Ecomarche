@@ -24,8 +24,8 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->float('discount');
             $table->smallInteger('quantity');
-            $table->text('content');
-            $table->tinyInteger('status');
+            $table->text('content')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

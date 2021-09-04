@@ -12,6 +12,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        // dd(Auth::check());
         if(Auth::check()){
             return view('backend.dashboard.index');
         }

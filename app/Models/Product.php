@@ -12,3 +12,5 @@ class Product extends Model
     use SoftDeletes;
     protected $fillable =['title','metatitle','slug','summary','type','sku','price','discount','quantity','content','status'];
 }
+
+

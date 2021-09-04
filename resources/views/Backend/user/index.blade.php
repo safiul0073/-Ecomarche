@@ -34,7 +34,7 @@
                             <td> {{$user->name}}</td>
                             <td> {{$user->email}}</td>
                             <td> {{$user->phone}}</td>
-                            <td> {{$user->role_users->role->title}}</td>
+                            <td> {{!empty($user->role_users) ? $user->role_users->role->title : ""}}</td>
                             <td> {{Str::limit($user->address,30)}} </td>
                             {{-- <td> {{}}</td> --}}
                             <td> {{$user->status == 1 ? 'active' : ''}} </td>

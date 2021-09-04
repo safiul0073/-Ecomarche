@@ -40,6 +40,7 @@ class UserController extends Controller
 
     public function edit($id){
         $user = User::find($id);
-        return view('Backend.user.edit',compact('user'));
+        $roles = Role::all();
+        return view('Backend.user.edit',compact('user', 'roles'));
     }
 }

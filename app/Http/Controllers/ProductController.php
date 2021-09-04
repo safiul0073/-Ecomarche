@@ -20,17 +20,17 @@ class ProductController extends Controller
 
     public function store(Request $request){
         // return $request->all();
-        $product    = [
-            'title'     => $request->title,
-            'summary'   => $request->summary,
-            'sku'       => $request->sku,
-            'price'     => $request->price,
-            'discount'  => $request->discount,
-            'quantity'  => $request->quantity,
-            'content'   => $request->content,
-            'status'    => $request->status
-        ];
-        Product::create($product);
+        // $product    = [
+        //     'title'     => $request->title,
+        //     'summary'   => $request->summary,
+        //     'sku'       => $request->sku,
+        //     'price'     => $request->price,
+        //     'discount'  => $request->discount,
+        //     'quantity'  => $request->quantity,
+        //     'content'   => $request->content,
+        //     'status'    => $request->status
+        // ];
+        Product::create($request->all());
         Toastr::Success('Product create successfully','Success');
         return redirect()->route('product.index');
     }

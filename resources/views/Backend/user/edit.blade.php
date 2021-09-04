@@ -72,7 +72,8 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="role"  id="">
+                                {{-- {{dd($user->role_users->role_id)}} --}}
+                                <select class="form-control" name="role" value={{!empty($user->role_users) ? $user->role_users->role_id : ''}} id="">
                                     @foreach ($roles as $role )
                                     <option value="{{$role->id}}">{{$role->title}}</option>
 

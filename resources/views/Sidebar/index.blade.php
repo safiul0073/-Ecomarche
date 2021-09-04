@@ -123,6 +123,12 @@
               <span>Store</span>
             </a>
         </li>
+        <li class="sidebar">
+            <a href="{{route('product.index')}}">
+              <i class="far fa-gem"></i>
+              <span>Product</span>
+            </a>
+        </li>
         <li class="sidebar-dropdown">
           <a href="#">
             <i class="fa fa-chart-line"></i>

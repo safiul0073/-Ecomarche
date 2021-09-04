@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
@@ -11,14 +12,12 @@ use App\Models\Slider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-// Route::get('/', function () {
-//     return view('');
+// Route::middleware(['pro', 'second'])->group(function () {
+    
 // });
 
-// Auth::routes();
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::post('login', [AdminController::class, 'login'])->name('login');
 
 // Category Section here....
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');

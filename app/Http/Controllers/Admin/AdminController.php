@@ -19,4 +19,9 @@ class AdminController extends Controller
         }
         return back();
     }
+
+    function logout() {
+        Auth::logout();
+        return view('auth.login');
+    }
 }

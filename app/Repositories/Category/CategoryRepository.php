@@ -27,11 +27,5 @@ class categoryRepository implements CategoryInterface
 
     }
 
-    public function update(Category $category) {
 
-    }
-
-    public function delete(Category $category) {
-
-    }
 }

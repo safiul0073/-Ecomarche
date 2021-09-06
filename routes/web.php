@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::post('login', [AdminController::class, 'login'])->name('login');
+Route::get('logout', [AdminController::class, 'logout'])->name('logout');
 
 // Category Section here....
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');

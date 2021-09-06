@@ -30,6 +30,7 @@ class ProductController extends Controller
         //     'content'   => $request->content,
         //     'status'    => $request->status
         // ];
+        
         Product::create($request->all());
         Toastr::Success('Product create successfully','Success');
         return redirect()->route('product.index');

@@ -28,12 +28,16 @@ class UserController extends Controller
              'email'    => $request->email,
              'phone'    => $request->phone,
              'address'  => $request->address,
-             'status'   => $request->status,
              'password' => $request->password
          ];
+         $image_url = "sdfsdsdfdsf.png";
          $user = User::create($user);
 
          $roles = $user->role_users()->create($role);
+         if ($image_url) {
+            $user->image()->create(['url' => $image_url]);
+         }
+         
          return redirect()->route('user.index');
 
     }

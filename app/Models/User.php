@@ -23,7 +23,6 @@ class User extends Authenticatable
         'email',
         'phone',
         'address',
-        'status',
         'password',
     ];
 
@@ -50,5 +49,10 @@ class User extends Authenticatable
 
     public function role_users(){
         return $this->hasOne(RoleUser::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

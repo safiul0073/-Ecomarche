@@ -73,9 +73,15 @@
 
                             <div class="col-md-6">
                                 {{-- {{dd($user->role_users->role_id)}} --}}
-                                <select class="form-control" name="role" value={{!empty($user->role_users) ? $user->role_users->role_id : ''}} id="">
+                                <select class="form-control" name="role" id="">
                                     @foreach ($roles as $role )
-                                    <option value="{{$role->id}}">{{$role->title}}</option>
+
+                                        @if (!empty($user->role_users) && $user->role_users->role_id == $role->id)
+                                        <option selected value="{{$role->id}}">{{$role->title}}</option>      
+                                        @else
+                                        <option value="{{$role->id}}">{{$role->title}}</option>
+                                        @endif
+                                    
 
                                     @endforeach
 

@@ -37,24 +37,17 @@ class UserController extends Controller
         $slug  = Str::slug($request->name);
         if($request->hasFile('image')){
             
-            $image = $request->file('image');
-            $imageName = $image->getClientOriginalName();
-            $path = "user_image/";
-            $imageUniq = $slug.'-'.Carbon::now()->toDateString().'-'.uniqid();
-            $imageUrl = $path.$imageUniq.$imageName;
-            
-           $image->move(storage_path($path), $imageUrl);
-           
+            $imageUrl = imageUpload($slug,  $request->file('image'));          
         }
 
-         $user = [
+        //  $user = [
 
-             'name'     => $request->name,
-             'email'    => $request->email,
-             'phone'    => $request->phone,
-             'address'  => $request->address,
-             'password' => $request->password
-         ];
+        //      'name'     => $request->name,
+        //      'email'    => $request->email,
+        //      'phone'    => $request->phone,
+        //      'address'  => $request->address,
+        //      'password' => $request->password
+        //  ];
       
          $user = User::create($request->all());
 

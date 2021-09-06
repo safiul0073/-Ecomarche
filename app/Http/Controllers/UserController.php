@@ -23,6 +23,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
+        $imageUrl = '';
         $role = ['role_id' => $request->role, 'status' => 1];
 
         $validated = $request->validate([
@@ -31,35 +32,35 @@ class UserController extends Controller
             'phone' => 'required'
 
         ]);
-        $image = $request->file('url');
+       
+        // $image = $request->file('image');
         $slug  = Str::slug($request->name);
-        if(isset($image)){
-            $currentdate    = Carbon::now()->toDateString();
-            $imagename = $slug.'-'.$currentdate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-
-
-            if(!Storage::disk('public')->exists('user_image')){
-                Storage::disk('public')->makeDirectory('user_image');
-            }
-           Storage::disk('public')->put('user_image/',$imagename);
-         // dd($imagename);
+        if($request->hasFile('image')){
+            
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $path = "user_image/";
+            $imageUniq = $slug.'-'.Carbon::now()->toDateString().'-'.uniqid();
+            $imageUrl = $path.$imageUniq.$imageName;
+            
+           $image->move(storage_path($path), $imageUrl);
+           
         }
 
-        //  $user = [
+         $user = [
 
-        //      'name'     => $request->name,
-        //      'email'    => $request->email,
-        //      'phone'    => $request->phone,
-        //      'address'  => $request->address,
-        //      'password' => $request->password
-        //  ];
-       // $image_url = "sdfsdsdfdsf.png";
+             'name'     => $request->name,
+             'email'    => $request->email,
+             'phone'    => $request->phone,
+             'address'  => $request->address,
+             'password' => $request->password
+         ];
+      
          $user = User::create($request->all());
 
-         $roles = $user->role_users()->create($role);
-         if ($imagename) {
-            $user->image()->create(['url' => $imagename]);
+         $user->role_users()->create($role);
+         if (!$imageUrl == '') {
+            $user->image()->create(['url' => $imageUrl]);
          }
 
          return redirect()->route('user.index');

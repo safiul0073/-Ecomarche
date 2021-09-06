@@ -23,6 +23,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
+        $imageUrl = '';
         $role = ['role_id' => $request->role, 'status' => 1];
 
         $validated = $request->validate([
@@ -32,11 +33,28 @@ class UserController extends Controller
 
         ]);
 
+        // $image = $request->file('image');
+        $slug  = Str::slug($request->name);
+        if($request->hasFile('image')){
 
+            $imageUrl = imageUpload($slug,  $request->file('image'));
+        }
+
+        //  $user = [
+
+        //      'name'     => $request->name,
+        //      'email'    => $request->email,
+        //      'phone'    => $request->phone,
+        //      'address'  => $request->address,
+        //      'password' => $request->password
+        //  ];
 
          $user = User::create($request->all());
 
-         $roles = $user->role_users()->create($role);
+         $user->role_users()->create($role);
+         if (!$imageUrl == '') {
+            $user->image()->create(['url' => $imageUrl]);
+         }
 
          return redirect()->route('user.index');
 

@@ -17,9 +17,9 @@
                         <td scope="col">Name</td>
                         <td scope="col">Email</td>
                         <td scope="col">Phone</td>
+                        <td scope="col">Image</td>
                         <td scope="col">Role</td>
                         <td scope="col">Address</td>
-                        <td scope="col">Status</td>
                         <td scope="col">Action</td>
 
 
@@ -34,17 +34,16 @@
                             <td> {{$user->name}}</td>
                             <td> {{$user->email}}</td>
                             <td> {{$user->phone}}</td>
+                            <td> {{!empty($user->url) ? $user->image->imageable_id : ''}}</td>
                             <td> {{!empty($user->role_users) ? $user->role_users->role->title : ""}}</td>
                             <td> {{Str::limit($user->address,30)}} </td>
-                            {{-- <td> {{}}</td> --}}
-                            <td> {{$user->status == 1 ? 'active' : ''}} </td>
                             <td>
                                 <a class="btn btn-info waves-effect" href="{{route('user.edit',$user->id)}}">edit</a>
-                                {{-- <button class="btn btn-danger waves-effect" onclick="deleteStore({{ $store->id }})">delete</button>
-                                <form id="delete-form-{{ $store->id }}" action="{{route('store.destroy',$store->id)}}" method="POST" style="display: none">
+                                <button class="btn btn-danger waves-effect" onclick="deleteUser({{ $user->id }})">delete</button>
+                                <form id="delete-form-{{ $user->id }}" action="{{route('user.destroy',$user->id)}}" method="POST" style="display: none">
                                     @csrf
                                     @method('DELETE')
-                                </form> --}}
+                                </form>
                             </td>
 
                         </tr>
@@ -69,7 +68,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-    function deleteStore(id){
+    function deleteUser(id){
 
         const swalWithBootstrapButtons = Swal.mixin({
 customClass: {

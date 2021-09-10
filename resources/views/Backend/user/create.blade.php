@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('user.store') }}">
+                    <form method="POST" enctype="multipart/form-data" action="{{!empty($user) ? route('user.update',$user->id) : route('user.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" value="{{!empty($user) ? $user->name : ''}}"  type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" value="{{!empty($user) ? $user->email : ''}}"  type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                             <div class="col-md-6">
-                                <input type="number"  class="form-control @error('phone') is-invalid @enderror" name="phone">
+                                <input type="number" value="{{!empty($user) ? $user->phone : ''}}" class="form-control @error('phone') is-invalid @enderror" name="phone">
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
 
                             <div class="col-md-6">
                                 {{-- <input type="text" class="form-control @error('text') is-invalid @enderror" name="text"> --}}
-                                <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="" cols="30" rows="2"></textarea>
+                                <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="" cols="30" rows="2">{{!empty($user) ? $user->address : ''}}</textarea>
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file"  class="form-control" name="image">
+                                <input type="file" value="{{!empty($user) ? $user->image : ''}}" class="form-control" name="image">
                             </div>
                         </div>
 
@@ -80,23 +80,18 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="role" value="{{!empty($user->role_users) ? $user->role_users->role_id : ''}}"  id="">
+                                <select class="form-control" name="role" id="">
                                     @foreach ($roles as $role )
-                                    <option value="{{$role->id}}">{{$role->title}}</option>
+
+                                        @if (!empty($user->role_users) && $user->role_users->role_id == $role->id)
+                                        <option selected value="{{$role->id}}">{{$role->title}}</option>
+                                        @else
+                                        <option value="{{$role->id}}">{{$role->title}}</option>
+                                        @endif
+
 
                                     @endforeach
 
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
-
-                            <div class="col-md-6">
-                                <select class="form-control" name="status"  id="">
-                                    <option value="1">Active</option>
-                                    <option value="0">UnActive</option>
                                 </select>
                             </div>
                         </div>

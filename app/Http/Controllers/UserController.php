@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        $imageUrl = '';
+         $imageUrl = '';
         $role = ['role_id' => $request->role, 'status' => 1];
 
         $validated = $request->validate([
@@ -33,21 +34,14 @@ class UserController extends Controller
 
         ]);
 
-        // $image = $request->file('image');
+        //.. $image = $request->file('image');
         $slug  = Str::slug($request->name);
         if($request->hasFile('image')){
 
             $imageUrl = imageUpload($slug,  $request->file('image'));
         }
 
-        //  $user = [
 
-        //      'name'     => $request->name,
-        //      'email'    => $request->email,
-        //      'phone'    => $request->phone,
-        //      'address'  => $request->address,
-        //      'password' => $request->password
-        //  ];
 
          $user = User::create($request->all());
 
@@ -55,7 +49,6 @@ class UserController extends Controller
          if (!$imageUrl == '') {
             $user->image()->create(['url' => $imageUrl]);
          }
-
          return redirect()->route('user.index');
 
     }
@@ -63,6 +56,21 @@ class UserController extends Controller
     public function edit($id){
         $user = User::find($id);
         $roles = Role::all();
-        return view('Backend.user.edit',compact('user', 'roles'));
+        return view('Backend.user.create',compact('user', 'roles'));
+    }
+
+    public function update(Request $request,$id){
+       // $role = ['role_id' => $request->role, 'status' => true];
+
+        $user = User::find($id)->update($request->all());
+
+
+      //  $user->role_users()->update();
+        return redirect()->route('user.index');
+    }
+    public function destroy($id){
+        User::find($id)->delete();
+        Toastr::Success('User successfully deleted','Success');
+        return redirect();
     }
 }

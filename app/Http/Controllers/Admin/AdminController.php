@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -11,6 +12,7 @@ class AdminController extends Controller
     
     public function login(Request $request)
     {
+
         $credentials = ['email' => $request->email, 'password' => $request->password];
 
         if (Auth::attempt($credentials)) {
@@ -20,8 +22,14 @@ class AdminController extends Controller
         return back();
     }
 
-    function logout() {
+  public function logout() {
         Auth::logout();
-        return view('auth.login');
+        return view('auth.dashboardLogin');
     }
+
+  public function index () {
+        return view('auth.dashboardLogin');
+    }
+
+
 }

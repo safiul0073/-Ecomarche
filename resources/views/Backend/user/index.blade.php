@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="d-flex justify-content-between justify-content-center">
             <h1 class="text-primary">User List</h1>
             <a href="{{route('user.create')}}" class="btn btn-outline-primary"><i class="material-icons">Create User</i></a>
         </div>

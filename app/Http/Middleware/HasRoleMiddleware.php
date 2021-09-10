@@ -17,9 +17,10 @@ class HasRoleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (Auth::check() && !empty(Auth::user()->role_users)) {
-        //     abort(404);
-        // }
+        
+        if (!empty(Auth::user()->role_users)) {
+            abort(404);
+        }
         
         return $next($request);
     }

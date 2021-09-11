@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +19,13 @@ class HasRoleMiddleware
     public function handle(Request $request, Closure $next)
     {
         
-        if (!empty(Auth::user()->role_users)) {
+        if (Auth::check()) {
+            if($request->user()->hasRole(1)) {
+                return $next($request);
+            }
             abort(404);
         }
         
-        return $next($request);
+        
     }
 }

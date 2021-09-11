@@ -46,6 +46,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function hasRole ($id) {
+
+        if (!is_null($id)) {
+            if ($this->role_users->user_id == $id) return true;
+        }
+        return false;
+    }
 
 
     public function role_users(){

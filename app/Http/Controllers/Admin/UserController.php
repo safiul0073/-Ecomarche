@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -40,9 +42,6 @@ class UserController extends Controller
 
             $imageUrl = imageUpload($slug,  $request->file('image'));
         }
-
-
-
          $user = User::create($request->all());
 
          $user->role_users()->create($role);
@@ -56,21 +55,19 @@ class UserController extends Controller
     public function edit($id){
         $user = User::find($id);
         $roles = Role::all();
+        
         return view('Backend.user.create',compact('user', 'roles'));
     }
 
     public function update(Request $request,$id){
-       // $role = ['role_id' => $request->role, 'status' => true];
-
-        $user = User::find($id)->update($request->all());
-
-
-      //  $user->role_users()->update();
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
         return redirect()->route('user.index');
     }
     public function destroy($id){
         User::find($id)->delete();
         Toastr::Success('User successfully deleted','Success');
-        return redirect();
+        return redirect()->back();
     }
 }

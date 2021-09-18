@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\StoreController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\StoreController;
+use App\Http\Controllers\Admin\UserController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

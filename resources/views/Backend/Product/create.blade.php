@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Product') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{!empty($product) ? route('product.update',$product->id) : route('product.store')}}">
+                    <form method="POST" action="{{!empty($product) ? route('product.update',$product->id) : route('product.store')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -50,6 +50,14 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" value="{{!empty($product) ? $product->image : ''}}" class="form-control" name="image">
                             </div>
                         </div>
 

@@ -10,7 +10,19 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable =['title','metatitle','slug','summary','type','sku','price','discount','quantity','content','status'];
+    protected $fillable =[
+        'title',
+        'metatitle',
+        'slug',
+        'summary',
+        'type',
+        'sku',
+        'price',
+        'discount',
+        'quantity',
+        'content',
+        'status'
+    ];
 
     public function image()
     {

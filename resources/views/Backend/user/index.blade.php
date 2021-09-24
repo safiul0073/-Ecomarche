@@ -34,7 +34,7 @@
                             <td> {{$user->name}}</td>
                             <td> {{$user->email}}</td>
                             <td> {{$user->phone}}</td>
-                            <td> {{!empty($user->url) ? $user->image->imageable_id : ''}}</td>
+                            <td> <img src="{{ asset("{{!empty($user->image) ? $user->image->url : ''}}")}}" alt=""> </td>
                             <td> {{!empty($user->role_users) ? $user->role_users->role->title : ""}}</td>
                             <td> {{Str::limit($user->address,30)}} </td>
                             <td>

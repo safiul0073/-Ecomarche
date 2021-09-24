@@ -21,7 +21,7 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        // return $request->all();
+       dd($request->all());
         // $product    = [
         //     'title'     => $request->title,
         //     'summary'   => $request->summary,

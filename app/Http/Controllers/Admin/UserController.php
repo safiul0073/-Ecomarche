@@ -16,7 +16,8 @@ class UserController extends Controller
 {
     public function index(){
         $roles = Role::all();
-        $users = User::latest()->get();
+        $users = User::with('image', 'role_users')->get();
+        
         return view('Backend.user.index',compact('users','roles'));
     }
 

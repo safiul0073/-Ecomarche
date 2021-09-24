@@ -11,6 +11,9 @@
         </div>
         <div  class="card-body">
             <form method="POST" action="{{!empty($category) ? route('category.update', $category->id) : route("category.store")}}">
+                @if (!empty($category))
+                @method("PUT")
+                @endif
                 
                 @csrf
                 <div class="form-group">

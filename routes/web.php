@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +19,8 @@ Route::post('login', [AdminController::class, 'login'])->name('login');
 
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
 // Category Section here....
-Route::middleware(['auth', 'hasRole'])->group(function () {
-    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-});
+
+Route::resource('category', CategoryController::class);
 
 
 

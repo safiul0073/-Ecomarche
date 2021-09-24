@@ -3,8 +3,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -19,7 +21,7 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        // return $request->all();
+       dd($request->all());
         // $product    = [
         //     'title'     => $request->title,
         //     'summary'   => $request->summary,
@@ -30,8 +32,16 @@ class ProductController extends Controller
         //     'content'   => $request->content,
         //     'status'    => $request->status
         // ];
-        
-        Product::create($request->all());
+        $imageUrl = '';
+        $slug = Str::slug($request->title);
+        if($request->hasFile('image')){
+            $imageUrl = imageUpload($slug, $request->file('image'));
+        }
+
+        $product = Product::create($request->all());
+        if(!$imageUrl == ''){
+            $product->image()->create(['url' => $imageUrl]);
+        }
         Toastr::Success('Product create successfully','Success');
         return redirect()->route('product.index');
     }
@@ -42,17 +52,19 @@ class ProductController extends Controller
     }
 
     public function update(Request $request,$id){
-        $products    = [
-            'title'     => $request->title,
-            'summary'   => $request->summary,
-            'sku'       => $request->sku,
-            'price'     => $request->price,
-            'discount'  => $request->discount,
-            'quantity'  => $request->quantity,
-            'content'   => $request->content,
-            'status'    => $request->status
-        ];
-        Product::find($id)->update($products);
+
+        $imageUrl = '';
+        $slug = Str::slug($request->title);
+        if($request->hasFile('image')){
+            $imageUrl = imageUpload($slug, $request->file('image'));
+        }
+
+        $product = Product::find($id)->update($request->all());
+        if(!$imageUrl == ''){
+
+            $product->image()->updateOrCreate(['url' => $imageUrl]);
+
+        }
         Toastr::Success('Product Updated successfully','Success');
         return redirect()->route('product.index');
     }

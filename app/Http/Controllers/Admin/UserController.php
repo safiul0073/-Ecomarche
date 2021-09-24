@@ -16,7 +16,8 @@ class UserController extends Controller
 {
     public function index(){
         $roles = Role::all();
-        $users = User::latest()->get();
+        $users = User::with('image', 'role_users')->get();
+        
         return view('Backend.user.index',compact('users','roles'));
     }
 
@@ -55,7 +56,7 @@ class UserController extends Controller
     public function edit($id){
         $user = User::find($id);
         $roles = Role::all();
-        
+
         return view('Backend.user.create',compact('user', 'roles'));
     }
 
@@ -63,8 +64,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->all());
         $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
+
         return redirect()->route('user.index');
     }
+
     public function destroy($id){
         User::find($id)->delete();
         Toastr::Success('User successfully deleted','Success');

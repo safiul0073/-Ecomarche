@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Product') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{!empty($product) ? route('product.update',$product->id) : route('product.store')}}">
+                    <form method="POST" action="{{!empty($product) ? route('product.update',$product->id) : route('product.store')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -50,6 +50,18 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+
+                            <div class="col-md-6 ">
+                                <input id="file-input" onchange="priview()" accept="image/png, image/jpg, image/jpeg" type="file" multiple value="{{!empty($product) ? $product->image : ''}}" class="form-control" name="image[]">
+
+                                <div id="image-preview">
+
+                                </div>
                             </div>
                         </div>
 
@@ -123,10 +135,6 @@
                             </div>
                         </div>
 
-
-
-
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <input type="submit" class="btn btn-primary" value="Register">
@@ -140,3 +148,52 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+    <script>
+        let files = document.getElementById("file-input")
+        let container = document.getElementById("image-preview")
+
+        const priview = () => {
+
+            for (i of files.files) {
+                let reader = new FileReader();
+                let figer = document.createElement("figure")
+                let figCap = document.createElement("figCaption")
+                let deleteButton = document.createElement("div")
+                deleteButton.innerText = "+"
+                figCap.innerText = i.name
+                figer.appendChild(figCap)
+
+                reader.onload = () => {
+                    let img = document.createElement("img")
+                    img.setAttribute("src", reader.result)
+                    figer.insertAdjacentElement(deleteButton, img, figCap)
+                    // figer.insertBefore(img, figCap)
+                }
+                container.appendChild(figer)
+                reader.readAsDataURL(i)
+            }
+        }
+    </script>
+
+
+@endpush
+
+@push('js')
+<style type="text/css">
+    figure {
+        width: 45%;
+        display: block;
+    }
+    img {
+        width: 100%;
+    }
+    #image-preview {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px
+    }
+</style>
+@endpush

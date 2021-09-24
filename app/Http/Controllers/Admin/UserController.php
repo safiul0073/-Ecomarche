@@ -41,7 +41,7 @@ class UserController extends Controller
         $slug  = Str::slug($request->name);
         if($request->hasFile('image')){
 
-            $imageUrl = imageUpload($slug,  $request->file('image'));
+            $imageUrl = imageUpload( $request->file('image'));
         }
          $user = User::create($request->all());
 

@@ -21,21 +21,15 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-       dd($request->all());
-        // $product    = [
-        //     'title'     => $request->title,
-        //     'summary'   => $request->summary,
-        //     'sku'       => $request->sku,
-        //     'price'     => $request->price,
-        //     'discount'  => $request->discount,
-        //     'quantity'  => $request->quantity,
-        //     'content'   => $request->content,
-        //     'status'    => $request->status
-        // ];
+
         $imageUrl = '';
-        $slug = Str::slug($request->title);
         if($request->hasFile('image')){
-            $imageUrl = imageUpload($slug, $request->file('image'));
+            $data = [];
+            foreach($request->image as $img) {
+                $url = imageUpload($img);
+                $data[] = $url;
+            }
+            $imageUrl = implode(',', $data);
         }
 
         $product = Product::create($request->all());

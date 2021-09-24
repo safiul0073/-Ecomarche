@@ -168,8 +168,8 @@
                 reader.onload = () => {
                     let img = document.createElement("img")
                     img.setAttribute("src", reader.result)
-                    figer.insertAdjacentElement(deleteButton, img, figCap)
-                    // figer.insertBefore(img, figCap)
+                    // figer.insertAdjacentElement(deleteButton, img, figCap)
+                    figer.insertBefore(img, figCap)
                 }
                 container.appendChild(figer)
                 reader.readAsDataURL(i)

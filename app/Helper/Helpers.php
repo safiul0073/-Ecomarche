@@ -4,36 +4,15 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 
 if (! function_exists('imageUpload')) {
-    function imageUpload($slug, $image)
+    function imageUpload($image)
     {
-        if (is_array($image)) {
-            $data = [];
-            foreach ($image as $img) {
-                $imageName = $img->getClientOriginalName();
-                $path = "user_image/";
-                $imageUniq = $slug.'-'.Carbon::now()->toDateString().'-'.uniqid();
-                $imageUrl = $path.$imageUniq.$imageName;
-                
-                $img->move(storage_path($path), $imageUrl);
-                $data[] = $imageUrl;
-                return json_encode($data);
-            }
-        }else{
-            $imageName = $image->getClientOriginalName();
-            $path = "user_image/";
-            $imageUniq = $slug.'-'.Carbon::now()->toDateString().'-'.uniqid();
-            $imageUrl = $path.$imageUniq.$imageName;
+            $imagename = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
+            $imagepublicpath = public_path('storage/image');
+            $image->move($imagepublicpath, $imagename);
+            $imagepath = '/storage/image/'.$imagename;
             
-            $image->move(storage_path($path), $imageUrl);
-           return $imageUrl;
-        }
-       
+           return $imagepath;
     }
 }
 
-if (! function_exists('convertUTCToLocal')) {
-    function convertUTCToLocal($time)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $time, 'UTC')->setTimezone('Europe/Paris');
-    }
-}
+

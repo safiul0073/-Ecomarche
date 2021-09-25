@@ -8,8 +8,9 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Mail\SendEmailMailable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -73,6 +74,12 @@ Route::post('/product/store', [ProductController::class, 'store'])->name('produc
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+
+
+Route::get("/send-mail", function () {
+    Mail::to("parsonal494@gmail.com")->send(new SendEmailMailable());
+});
 
 
 

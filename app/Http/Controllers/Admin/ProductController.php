@@ -12,8 +12,10 @@ class ProductController extends Controller
 {
 
     public function index()
-    {  
-        return view('Backend.Product.index');
+    {
+        $category = Category::all();
+        $product = Product::with('image','category','brand')->latest()->get();
+        return view('Backend.Product.index',compact('product','category'));
     }
 
     public function create()
@@ -24,7 +26,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-       
+
+
+
         $iamgeUrl = '';
         if ( $request->hasFile('images')) {
             $urls = [];
@@ -33,10 +37,11 @@ class ProductController extends Controller
                 $urls[] = imageUpload($image);
             }
 
-            $iamgeUrl = implode(',', $urls);  
+            $iamgeUrl = implode(',', $urls);
         }
 
        $product = Product::create($request->all());
+
 
         if ( $iamgeUrl != '') {
             $product->image()->create(['url' => $iamgeUrl]);
@@ -48,7 +53,8 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        //
+        $product = Product::with('image','category','brand')->latest()->get();
+        return view('Backend.Product.show',compact('product'));
     }
 
 

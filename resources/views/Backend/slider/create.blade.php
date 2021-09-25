@@ -12,6 +12,9 @@
         <div  class="card-body">
             <form method="POST" action="{{ !empty($slider) ? route('slider.update',$slider->id) : route('slider.store')}}">
 
+                @if (!empty($slider))
+                @method("PUT")
+                @endif
                 @csrf
                 <div class="form-group">
                     <label for="name">Title:</label>

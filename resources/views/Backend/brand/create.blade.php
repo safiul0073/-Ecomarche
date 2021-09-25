@@ -15,6 +15,9 @@
                   <tbody>
 
                     <form action="{{!empty($brand) ? route('brand.update',$brand->id) : route('brand.store')}}" method="POST">
+                        @if (!empty($brand))
+                            @method("PUT")
+                        @endif
                         @csrf
                         <div class="form-group">
                             <label for="name">Brand Name</label>

@@ -1,24 +1,41 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
 use App\Models\Store;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function index(){
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $stores = Store::all();
         return view('Backend.store.index',compact('stores'));
     }
 
-    public function create(){
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         return view('Backend.store.create');
     }
 
-    public function store(Request $request){
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $store = [
             'name'      => $request->name,
             'phone'     => $request->phone,
@@ -29,15 +46,40 @@ class StoreController extends Controller
         ];
         Store::create($store);
         return redirect()->route('store.index');
-
     }
 
-    public function edit($id){
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
         $store = Store::find($id);
         return view('Backend.store.create',compact('store'));
     }
 
-    public function update(Request $request,$id){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
         $store = [
             'name'      => $request->name,
             'phone'     => $request->phone,
@@ -49,10 +91,15 @@ class StoreController extends Controller
         return redirect()->route('store.index');
     }
 
-    public function destroy($id){
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
         Store::find($id)->delete();
         return redirect()->back();
     }
-
 }

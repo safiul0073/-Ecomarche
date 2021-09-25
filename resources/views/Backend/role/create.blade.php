@@ -12,6 +12,9 @@
         <div  class="card-body">
             <form method="POST" action="{{ !empty($role) ? route('role.update',$role->id) : route("role.store")}}">
 
+                @if (!empty($role))
+                @method("PUT")
+                @endif
                 @csrf
                 <div class="form-group">
                     <label for="name">Title:</label>

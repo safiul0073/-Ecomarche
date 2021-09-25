@@ -19,6 +19,7 @@
                         <td scope="col">City</td>
                         <td scope="col">Description</td>
                         <td scope="col">Status</td>
+                        <td scope="col">Action</td>
 
 
                     </tr>

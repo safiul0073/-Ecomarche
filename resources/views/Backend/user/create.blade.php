@@ -9,6 +9,10 @@
 
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" action="{{!empty($user) ? route('user.update',$user->id) : route('user.store') }}">
+                        @if (!empty($user))
+                        @method("PUT")
+
+                        @endif
                         @csrf
 
                         <div class="form-group row">
@@ -115,7 +119,7 @@
                                 </div>
                         </div>
                         @endif
-                        
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

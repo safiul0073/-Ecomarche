@@ -11,6 +11,8 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable =[
+        'category_id',
+        'brand_id',
         'title',
         'metatitle',
         'slug',
@@ -27,6 +29,17 @@ class Product extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function brands()
+    {
+        return $this->belongsTo(Brand::class);
     }
 }
 

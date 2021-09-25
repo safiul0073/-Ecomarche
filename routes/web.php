@@ -9,10 +9,11 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
 use App\Mail\SendEmailMailable;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-
+use Monolog\Handler\RotatingFileHandler;
 
 Route::get('/', [AdminController::class, 'index']);
 Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard')->middleware("auth");
@@ -74,6 +75,13 @@ Route::post('/product/store', [ProductController::class, 'store'])->name('produc
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+// Route::get('/get/category',function(){
+//     $product = Product::find(1);
+//     foreach($product->items as $item){
+//         echo $item->category->name."<br>";
+//     }
+// });
 
 
 

@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(){
         $roles = Role::all();
         $users = User::with('image', 'role_users')->get();
-        
+
         return view('Backend.user.index',compact('users','roles'));
     }
 
@@ -61,7 +61,12 @@ class UserController extends Controller
     }
 
     public function update(Request $request,$id){
+
         $user = User::findOrFail($id);
+
+        $slug  = Str::slug($request->name);
+
+
         $user->update($request->all());
         $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
 

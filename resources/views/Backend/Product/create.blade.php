@@ -26,6 +26,36 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="category" id="">
+                                    @foreach ($categories as $category)
+                                     <option value="{{$category->id}}">{{$category->name}}</option>
+
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Brand') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="brand" id="">
+                                    @foreach ($brands as $brand)
+                                     <option value="{{$brand->id}}">{{$brand->name}}</option>
+
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Summary') }}</label>
 
                             <div class="col-md-6">

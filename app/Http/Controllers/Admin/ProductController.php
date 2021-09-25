@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
@@ -12,16 +14,20 @@ class ProductController extends Controller
 {
     //
     public function index(){
-         $products   = Product::all();
+         $products   = Product::with('image','categories','brands')->latest()->get();
+
         return view('Backend.Product.index',compact('products'));
     }
 
     public function create(){
-        return view('Backend.Product.create');
+        $brands = Brand::all();
+        $categories = Category::all();
+        return view('Backend.Product.create',compact('brands','categories'));
     }
 
     public function store(Request $request){
-
+        $brand = ['brand_id' => $request->brand ];
+        $category = ['category_id' => $request->category];
         $imageUrl = '';
         if($request->hasFile('image')){
             $data = [];
@@ -36,6 +42,9 @@ class ProductController extends Controller
         if(!$imageUrl == ''){
             $product->image()->create(['url' => $imageUrl]);
         }
+        $product->categories()->create($category);
+        $product->brands()->create($brand);
+        //dd($request->all());
         Toastr::Success('Product create successfully','Success');
         return redirect()->route('product.index');
     }

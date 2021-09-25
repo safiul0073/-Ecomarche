@@ -15,6 +15,8 @@
                     <tr>
                         <td scope="col">id</td>
                         <td scope="col">Title</td>
+                        <td scope="col">Category</td>
+                        <td scope="col">Brand</td>
                         <td scope="col">Summary</td>
                         <td scope="col">SKU</td>
                         <td scope="col">Price</td>
@@ -34,6 +36,8 @@
                         <tr>
                             <td> {{$key + 1}} </td>
                             <td> {{$product->title}}</td>
+                            <td> {{$product->categories->category}}</td>
+                            <td> {{$product->brands->brand}}</td>
                             <td> {{Str::limit($product->summary,30)}} </td>
                             <td> {{$product->sku}}</td>
                             <td> {{$product->price}}</td>

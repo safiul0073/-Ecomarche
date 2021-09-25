@@ -12,17 +12,13 @@ class ProductController extends Controller
 {
 
     public function index()
-    {
-        $products = Product::with('category', 'brand')->get();
- 
-        return view('Backend.Product.index', compact('products'));
+    {  
+        return view('Backend.Product.index');
     }
 
     public function create()
     {
-        $categorys = Category::all();
-        $brands = Brand::all();
-        return view('Backend.Product.create', compact('categorys', 'brands'));
+        return view('Backend.Product.create');
     }
 
 
@@ -70,6 +66,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index');
     }
 }

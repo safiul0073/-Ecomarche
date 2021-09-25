@@ -29,8 +29,8 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="category" id="">
-                                    @foreach ($categories as $category)
+                                <select class="form-control" name="category_id" id="">
+                                    @foreach ($categorys as $category)
                                      <option value="{{$category->id}}">{{$category->name}}</option>
 
                                     @endforeach
@@ -44,7 +44,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Brand') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="brand" id="">
+                                <select class="form-control" name="brand_id" id="">
                                     @foreach ($brands as $brand)
                                      <option value="{{$brand->id}}">{{$brand->name}}</option>
 
@@ -87,7 +87,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6 ">
-                                <input id="file-input" onchange="priview()" accept="image/png, image/jpg, image/jpeg" type="file" multiple value="{{!empty($product) ? $product->image : ''}}" class="form-control" name="image[]">
+                                <input id="file-input" onchange="priview()" accept="image/png, image/jpg, image/jpeg" type="file" multiple value="{{!empty($product) ? $product->image : ''}}" class="form-control" name="images[]">
 
                                 <div id="image-preview">
 

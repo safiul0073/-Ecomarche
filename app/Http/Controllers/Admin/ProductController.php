@@ -1,81 +1,75 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Support\Str;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    //
-    public function index(){
-         $products   = Product::with('image','categories','brands')->latest()->get();
 
-        return view('Backend.Product.index',compact('products'));
+    public function index()
+    {
+        $products = Product::with('category', 'brand')->get();
+ 
+        return view('Backend.Product.index', compact('products'));
     }
 
-    public function create(){
+    public function create()
+    {
+        $categorys = Category::all();
         $brands = Brand::all();
-        $categories = Category::all();
-        return view('Backend.Product.create',compact('brands','categories'));
+        return view('Backend.Product.create', compact('categorys', 'brands'));
     }
 
-    public function store(Request $request){
-        $brand = ['brand_id' => $request->brand ];
-        $category = ['category_id' => $request->category];
-        $imageUrl = '';
-        if($request->hasFile('image')){
-            $data = [];
-            foreach($request->image as $img) {
-                $url = imageUpload($img);
-                $data[] = $url;
+
+    public function store(Request $request)
+    {
+       
+        $iamgeUrl = '';
+        if ( $request->hasFile('images')) {
+            $urls = [];
+            $images = $request->file('images');
+            foreach ($images as $image) {
+                $urls[] = imageUpload($image);
             }
-            $imageUrl = implode(',', $data);
+
+            $iamgeUrl = implode(',', $urls);  
         }
 
-        $product = Product::create($request->all());
-        if(!$imageUrl == ''){
-            $product->image()->create(['url' => $imageUrl]);
+       $product = Product::create($request->all());
+
+        if ( $iamgeUrl != '') {
+            $product->image()->create(['url' => $iamgeUrl]);
         }
-        $product->categories()->create($category);
-        $product->brands()->create($brand);
-        //dd($request->all());
-        Toastr::Success('Product create successfully','Success');
+
         return redirect()->route('product.index');
     }
 
-    public function edit($id){
-        $product = Product::find($id);
-        return view('Backend.Product.create',compact('product'));
+
+    public function show(Product $product)
+    {
+        //
     }
 
-    public function update(Request $request,$id){
 
-        $imageUrl = '';
-        $slug = Str::slug($request->title);
-        if($request->hasFile('image')){
-            $imageUrl = imageUpload($slug, $request->file('image'));
-        }
-
-        $product = Product::find($id)->update($request->all());
-        if(!$imageUrl == ''){
-
-            $product->image()->updateOrCreate(['url' => $imageUrl]);
-
-        }
-        Toastr::Success('Product Updated successfully','Success');
-        return redirect()->route('product.index');
+    public function edit(Product $product)
+    {
+        //
     }
 
-    public function destroy($id){
-        // return $id;
-        Product::find($id)->delete();
-        Toastr::Success('Deleted Successfully','Success');
-        return redirect()->back();
+
+    public function update(Request $request, Product $product)
+    {
+        //
+    }
+
+
+    public function destroy(Product $product)
+    {
+        //
     }
 }

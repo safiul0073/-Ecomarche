@@ -36,8 +36,8 @@
                         <tr>
                             <td> {{$key + 1}} </td>
                             <td> {{$product->title}}</td>
-                            <td> {{$product->categories->category}}</td>
-                            <td> {{$product->brands->brand}}</td>
+                            {{-- <td> {{$product->category->name}}</td>
+                            <td> {{$product->brand->name}}</td> --}}
                             <td> {{Str::limit($product->summary,30)}} </td>
                             <td> {{$product->sku}}</td>
                             <td> {{$product->price}}</td>

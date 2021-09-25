@@ -67,14 +67,10 @@ Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.
 Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
+// product section here....
 
-// product section
-Route::get('/product/index', [ProductController::class, 'index'])->name('product.index');
-Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
-Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::resource('product', ProductController::class);
+
 
 // Route::get('/get/category',function(){
 //     $product = Product::find(1);

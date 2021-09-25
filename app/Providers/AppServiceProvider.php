@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['Backend.Product.create'], CategoryComposer::class);
-        View::composer(['Backend.Product.create'], BrandComposer::class);
+        View::composer(['Backend.Product.create','Backend.Category.index'], CategoryComposer::class);
+        View::composer(['Backend.Product.create','Backend.brand.index'], BrandComposer::class);
         View::composer(['Backend.Product.index'], ProductComposer::class);
     }
 }

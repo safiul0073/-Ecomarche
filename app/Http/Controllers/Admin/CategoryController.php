@@ -15,8 +15,8 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        $categorys = $this->categroy->getAll();
-        return view('Backend.Category.index', compact('categorys'));
+       
+        return view('Backend.Category.index');
     }
 
 

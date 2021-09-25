@@ -16,29 +16,17 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands     = Brand::all();
-        return view('Backend.brand.index',compact('brands'));
+        return view('Backend.brand.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('Backend.brand.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // dd($request->all());
+        
         $validated = $request->validate([
             'name' => 'required|max:255',
             'status' => 'required',

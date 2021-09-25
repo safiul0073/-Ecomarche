@@ -8,8 +8,11 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
+use App\Jobs\SendMail;
 use App\Mail\SendEmailMailable;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\SuccessfulPayment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -82,7 +85,16 @@ Route::resource('product', ProductController::class);
 
 
 Route::get("/send-mail", function () {
-    Mail::to("parsonal494@gmail.com")->send(new SendEmailMailable());
+    $job = (new SendMail())
+                    ->delay(now()->addSeconds(10));
+    dispatch($job);
+    return "Send Successfull";
+});
+Route::get("/send-notificaiton", function () {
+
+    $user = User::first();
+    $user->notify(new SuccessfulPayment());
+
 });
 
 

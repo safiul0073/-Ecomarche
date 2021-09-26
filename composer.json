@@ -9,10 +9,12 @@
         "brian2694/laravel-toastr": "^5.56",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/cashier": "^13.5",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
+        "stripe/stripe-php": "^7.97"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

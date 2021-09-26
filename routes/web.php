@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\StripeController;
 use App\Jobs\SendMail;
 use App\Mail\SendEmailMailable;
 use App\Models\Product;
@@ -53,6 +54,10 @@ Route::get("/send-notificaiton", function () {
     $user->notify(new SuccessfulPayment());
 
 });
+
+
+Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 
 

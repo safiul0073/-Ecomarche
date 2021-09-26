@@ -5,8 +5,9 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h1 class="text-primary">Product List</h1>
+            <a href="" class="btn btn-outline-primary"><i class="material-icons">Images</i></a>
             <a href="{{route('product.create')}}" class="btn btn-outline-primary"><i class="material-icons">Add Product</i></a>
         </div>
         <div class="card-body">
@@ -36,8 +37,8 @@
                         <tr>
                             <td> {{$key + 1}} </td>
                             <td> {{$product->title}}</td>
-                            <td> {{ $product->category_id }}</td>
-                            <td> {{$product->brand_id}}</td>
+                            <td> {{ $product->category->name }}</td>
+                            <td> {{$product->brand->name }}</td>
                             <td> {{Str::limit($product->summary,30)}} </td>
                             <td> {{$product->sku}}</td>
                             <td> {{$product->price}}</td>
@@ -46,13 +47,14 @@
                             <td> {{Str::limit($product->content,30)}} </td>
                             <td> {{$product->status == 1 ? 'active' : ''}} </td>
                             <td>
-                                <a class="btn btn-info waves-effect"  href="{{route('product.show',$product->id)}}"><i class="far fa-eye"></i>show</a>
-                                <a class="btn btn-info waves-effect" href="{{route('product.edit',$product->id)}}">edit</a>
-                                <button class="btn btn-danger waves-effect" onclick="deleteProduct({{ $product->id }})">delete</button>
-                                <form id="delete-form-{{ $product->id }}" action="{{route('product.destroy',$product->id)}}" method="POST" style="display: none">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                                <div class="flex">
+                                    <a class="" style="color:blanchedalmond;"  href="{{route('product.edit',$product->id)}}"><i class="fas fa-edit"></i></a>
+                                    <button class="" style="color:red;" onclick="deleteProduct({{ $product->id }})"><i class="far fa-trash-alt"></i></button>
+                                    <form id="delete-form-{{ $product->id }}" action="{{route('product.destroy',$product->id)}}" method="POST" style="display: none">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

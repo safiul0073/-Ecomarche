@@ -9,10 +9,23 @@
                 <h1>product details</h1>
             </div>
                 <div class="card-body">
-                    <div class="col-md-4" style="width: 18rem;">
-                        @foreach ($product->images as $img)
-                        <img src="{{ asset($product->$img->image->url}}" class="card-img-top" alt="...">
-                        @endforeach
+                    <div class="row">
+                        <div class="col-md-4" style="width: 18rem;">
+                            @php
+                                $image = DB::table('images')->where('imageable_id', $product->id)->first();
+                                $images = explode(',',$image->url);
+                            @endphp
+                            @foreach ($images as $img)
+                            <img src="{{URL::to($img)}}" style="height: 150px; width:200px;" class="card-img-top" alt="...">
+                            @endforeach
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="card-text">Summary: {{$product->summary}}</h4><br>
+                            <h4 class="card-text">Content: {{$product->content}}</h4><br>
+                            <h4 class="card-text">SKU: {{$product->sku}}</h4><br>
+
+
+                          </div>
                     </div>
                         <div class="col-md-4">
                           <p class="card-text">{{$product->summary}}</p>

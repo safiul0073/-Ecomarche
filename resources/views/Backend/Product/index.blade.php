@@ -18,12 +18,9 @@
                         <td scope="col">Title</td>
                         <td scope="col">Category</td>
                         <td scope="col">Brand</td>
-                        <td scope="col">Summary</td>
-                        <td scope="col">SKU</td>
                         <td scope="col">Price</td>
                         <td scope="col">Discount</td>
                         <td scope="col">Quantity</td>
-                        <td scope="col">Content</td>
                         <td scope="col">Status</td>
                         <td scope="col">Action</td>
 
@@ -44,7 +41,6 @@
                             <td> {{$product->price}}</td>
                             <td> {{$product->discount}}</td>
                             <td> {{$product->quantity}}</td>
-                            <td> {{Str::limit($product->content,30)}} </td>
                             <td> {{$product->status == 1 ? 'active' : ''}} </td>
                             <td>
                                 <div class="flex">

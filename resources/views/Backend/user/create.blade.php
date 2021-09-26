@@ -74,8 +74,9 @@
                         <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
+
                             <div class="col-md-6">
-                                <input type="file" value="{{!empty($user) ? $user->image : ''}}" class="form-control" name="image">
+                                <input type="file" onchange="priview()" value="{{!empty($user) ? $user->image : ''}}" class="form-control" name="image">
                             </div>
                         </div>
 
@@ -134,3 +135,32 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    let files = document.getElementById("file-input")
+    let container = document.getElementById("image-preview")
+
+    const priview = () => {
+
+        for (i of files.files) {
+            let reader = new FileReader();
+            let figer = document.createElement("figure")
+            let figCap = document.createElement("figCaption")
+            let deleteButton = document.createElement("div")
+            deleteButton.innerText = "+"
+            figCap.innerText = i.name
+            figer.appendChild(figCap)
+
+            reader.onload = () => {
+                let img = document.createElement("img")
+                img.setAttribute("src", reader.result)
+                // figer.insertAdjacentElement(deleteButton, img, figCap)
+                figer.insertBefore(img, figCap)
+            }
+            container.appendChild(figer)
+            reader.readAsDataURL(i)
+        }
+    }
+</script>
+@endpush

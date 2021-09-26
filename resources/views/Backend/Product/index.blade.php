@@ -17,12 +17,9 @@
                         <td scope="col">Title</td>
                         <td scope="col">Category</td>
                         <td scope="col">Brand</td>
-                        <td scope="col">Summary</td>
-                        <td scope="col">SKU</td>
                         <td scope="col">Price</td>
                         <td scope="col">Discount</td>
                         <td scope="col">Quantity</td>
-                        <td scope="col">Content</td>
                         <td scope="col">Status</td>
                         <td scope="col">Action</td>
 
@@ -36,14 +33,11 @@
                         <tr>
                             <td> {{$key + 1}} </td>
                             <td> {{$product->title}}</td>
-                            <td> {{ $product->category_id }}</td>
+                            <td> {{$product->category_id }}</td>
                             <td> {{$product->brand_id}}</td>
-                            <td> {{Str::limit($product->summary,30)}} </td>
-                            <td> {{$product->sku}}</td>
                             <td> {{$product->price}}</td>
                             <td> {{$product->discount}}</td>
                             <td> {{$product->quantity}}</td>
-                            <td> {{Str::limit($product->content,30)}} </td>
                             <td> {{$product->status == 1 ? 'active' : ''}} </td>
                             <td>
                                 <a class="btn btn-info waves-effect"  href="{{route('product.show',$product->id)}}"><i class="far fa-eye"></i>show</a>

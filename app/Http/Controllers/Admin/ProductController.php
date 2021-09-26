@@ -53,14 +53,14 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product = Product::with('image','category','brand')->latest()->get();
+         Product::with('image','category','brand')->latest()->get();
         return view('Backend.Product.show',compact('product'));
     }
 
 
     public function edit(Product $product)
     {
-        //
+        return view('Backend.Product.create',compact('product'));
     }
 
 

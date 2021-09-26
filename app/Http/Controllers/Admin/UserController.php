@@ -102,12 +102,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $user = User::findOrFail($id);
 
-        $slug  = Str::slug($request->name);
+
 
 
         $user->update($request->all());
+
         $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
 
         return redirect()->route('user.index');

@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\PaymentSceduling;
+use App\Services\Payment\PaymentService;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +27,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        $schedule->call(function () {
+            $details = PaymentSceduling::where('continue', 1)->first();
+
+            $payment = new PaymentService($details);
+            $payment->payment();
+        })->everyFiveMinutes();
     }
 
     /**

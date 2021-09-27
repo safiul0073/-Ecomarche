@@ -13,9 +13,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $category = Category::all();
-        $product = Product::with('image','category','brand')->latest()->get();
-        return view('Backend.Product.index',compact('product','category'));
+        return view('Backend.Product.index');
     }
 
     public function create()

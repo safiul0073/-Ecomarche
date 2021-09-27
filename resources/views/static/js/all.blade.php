@@ -7,7 +7,7 @@
     crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
     {{-- toaster --}}
-
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
     @stack('js')

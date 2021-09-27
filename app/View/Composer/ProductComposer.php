@@ -8,6 +8,6 @@ class ProductComposer {
 
     public function compose(View $view) {
         
-        $view->with('products', Product::with('category', 'brand')->latest()->get());
+        $view->with('products', Product::with('image','category', 'brand')->latest()->get());
     }
 }

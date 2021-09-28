@@ -6,14 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\Image\ImageInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
 
-    public function index()
+    protected $imageInterface;
+
+    public function __construct(ImageInterface $imageInterface) {
+        $this->imageInterface = $imageInterface;
+    }
+    
+    public function index(Request $request)
     {
-        return view('Backend.Product.index');
+        $tab = $request->tab;
+        
+        return view('Backend.Product.index', compact('tab'));
     }
 
     public function create()
@@ -29,13 +39,8 @@ class ProductController extends Controller
 
         $iamgeUrl = '';
         if ( $request->hasFile('images')) {
-            $urls = [];
-            $images = $request->file('images');
-            foreach ($images as $image) {
-                $urls[] = imageUpload($image);
-            }
-
-            $iamgeUrl = implode(',', $urls);
+           
+            $iamgeUrl = $this->imageInterface->uploadMultiImage($request->file('images'));
         }
 
        $product = Product::create($request->all());
@@ -64,13 +69,18 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        //
+        
     }
 
 
     public function destroy(Product $product)
     {
+        if($product->image){
+            $this->imageInterface->deleteMultiImage($product->image->url);
+            $product->image->delete();
+        }
         $product->delete();
+        
         return redirect()->route('product.index');
     }
 }

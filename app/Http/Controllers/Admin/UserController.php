@@ -7,15 +7,17 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use App\Services\Image\ImageInterface;
 use Illuminate\Http\Request;
+use File;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $imageInterface;
+
+    public function __construct(ImageInterface $imageInterface) {
+        $this->imageInterface = $imageInterface;
+    }
     public function index()
     {
         $roles = Role::all();
@@ -41,8 +43,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $imageUrl = '';
         $role = ['role_id' => $request->role, 'status' => 1];
 
@@ -57,7 +58,8 @@ class UserController extends Controller
         $slug  = Str::slug($request->name);
         if($request->hasFile('image')){
 
-            $imageUrl = imageUpload( $request->file('image'));
+            $imageUrl = $this->imageInterface->uploadSingleImage($request->file('image'));
+            
         }
          $user = User::create($request->all());
 
@@ -85,9 +87,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+        
         $roles = Role::all();
 
         return view('Backend.user.create',compact('user', 'roles'));
@@ -102,16 +104,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $imageUrl = '';
         $user = User::findOrFail($id);
-
-
-
-
         $user->update($request->all());
+        
+        if($request->hasFile('image')){
 
+            $imageUrl = $this->imageInterface->uploadSingleImage($request->file('image'));
+            
+            if($user->image){
+                $this->imageInterface->deleteSingleImage($user->image->url);
+                $user->image->delete();
+            }
+ 
+        }
         $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
-
+        if (!$imageUrl == '') {
+            $user->image()->updateOrCreate(['url' => $imageUrl]);
+         }
         return redirect()->route('user.index');
     }
 
@@ -123,9 +133,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::find($id)->delete();
+
+        if($user->image){
+            $this->imageInterface->deleteSingleImage($user->image->url);
+            $user->image->delete();
+        }
+        
+        $user->delete();
         Toastr::Success('User successfully deleted','Success');
         return redirect()->back();
     }

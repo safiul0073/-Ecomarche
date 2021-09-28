@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Product;
+use App\Services\Image\ImageInterface;
+use App\Services\Image\ImageService;
 use App\View\Composer\BrandComposer;
 use App\View\Composer\CategoryComposer;
 use App\View\Composer\ProductComposer;
@@ -31,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['Backend.Product.create','Backend.Category.index'], CategoryComposer::class);
         View::composer(['Backend.Product.create','Backend.brand.index'], BrandComposer::class);
         View::composer(['Backend.Product.index'], ProductComposer::class);
+
+
+        // image service bingin section..
+        $this->app->bind(ImageInterface::class, ImageService::class);
     }
 }

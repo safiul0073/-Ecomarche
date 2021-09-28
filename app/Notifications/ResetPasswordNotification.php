@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SuccessfulPayment extends Notification
+class ResetPasswordNotification extends Notification
 {
     use Queueable;
 
@@ -42,7 +42,7 @@ class SuccessfulPayment extends Notification
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')
-                    ->action('Reset Passwod', url('/'))
+                    ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 

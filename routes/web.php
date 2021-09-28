@@ -20,12 +20,19 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
-Route::get('/', [AdminController::class, 'index']);
+Route::get('/', [AdminController::class, 'index'])->name('admin-panal');
 Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard')->middleware("auth");
 Route::post('login', [AdminController::class, 'login'])->name('login');
+Route::get('reset-password', [AdminController::class, 'RequstPass'])->name('password.request');
+Route::post('/forgot-password', [AdminController::class, 'PassEmail'])->name('password.email');
 
 Route::get('logout', [AdminController::class, 'logout'])->name('logout');
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->name('password.reset');
 
+
+Route::post('/reset-password',[AdminController::class, 'passwordUpdate'])->name('password.update');
 Route::middleware(['auth'])->group(function () {
     
         

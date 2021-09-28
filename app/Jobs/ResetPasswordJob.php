@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\SendEmailMailable;
+use App\Mail\ResetMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendMail implements ShouldQueue
+class ResetPasswordJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -20,8 +20,7 @@ class SendMail implements ShouldQueue
      *
      * @return void
      */
-
-     protected $address;
+    protected $address;
     public function __construct($address)
     {
         $this->address = $address;
@@ -34,6 +33,6 @@ class SendMail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->address)->send(new SendEmailMailable());
+        Mail::to($this->address)->send(new ResetMail());
     }
 }

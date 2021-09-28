@@ -61,9 +61,10 @@ class ProductController extends Controller
     }
 
 
-    public function edit(Product $product)
+    public function edit(Product $product, Request $request)
     {
-        return view('Backend.Product.create',compact('product'));
+        $tab = $request->tab;
+        return view('Backend.Product.create',compact('product', 'tab'));
     }
 
 

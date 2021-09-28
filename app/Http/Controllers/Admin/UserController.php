@@ -102,10 +102,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         $imageUrl = '';
-        $user = User::findOrFail($id);
+        
         $user->update($request->all());
         
         if($request->hasFile('image')){
@@ -120,7 +120,7 @@ class UserController extends Controller
         }
         $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
         if (!$imageUrl == '') {
-            $user->image()->updateOrCreate(['url' => $imageUrl]);
+            $user->image()->create(['url' => $imageUrl]);
          }
         return redirect()->route('user.index');
     }

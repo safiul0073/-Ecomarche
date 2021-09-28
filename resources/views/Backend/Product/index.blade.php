@@ -9,7 +9,7 @@
             <h1 class="text-primary">Product List</h1>
             <div>
                 <a href="{{ url('product?tab=1') }}" class="btn btn-outline-primary"><i class="material-icons">List</i></a>
-                <a href="{{ url('product?tab=2') }}" class="btn btn-outline-primary"><i class="material-icons">Images</i></a>
+                <a href="{{ url('product?t2ab=') }}" class="btn btn-outline-primary"><i class="material-icons">Images</i></a>
             </div>
 
             <a href="{{route('product.create')}}" class="btn btn-outline-primary"><i class="material-icons">Add Product</i></a>

@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
 use App\Services\Image\ImageInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -30,7 +27,6 @@ class ProductController extends Controller
     {
         return view('Backend.Product.create');
     }
-
 
     public function store(Request $request)
     {

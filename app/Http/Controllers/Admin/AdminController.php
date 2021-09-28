@@ -47,22 +47,6 @@ class AdminController extends Controller
     return $status === Password::RESET_LINK_SENT
                 ? back()->with(['status' => __($status)])
                 : back()->withErrors(['email' => __($status)]);
-        // $user = User::where('email', $request->email)->first();
-        // if ($user) {
-        //     $code = rand(6); 
-        //     Mail::send('Backend.Mail.reset', ['user'=> $user, 'code'=>$code], function ($message) use ($user) {
-        //         $message->from("parsonal494@mail.com", "shop");
-        //         $message->to($user->emial);
-        //         $message->subject("Password Reset");
-        //     });
-        //     User::where('email',$request->email)->update([
-        //         'reset_pass'=>$code
-        //     ]);
-        //     Session::flash('success', "Mailed to your mail for passwor Change with token");
-        //     return back();
-        // }
-        // Session::flash('error', "Email not found!");
-        // return back();
     }
 
 

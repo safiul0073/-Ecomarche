@@ -3,13 +3,13 @@
 namespace App\Services\Image;
 
 
-interface ImageInterface  
+interface ImageInterface
 {
-   
 
-    public function deleteSingleImage($iamge);
+
+    public function deleteSingleImage($image);
     public function deleteMultiImage($images);
-    public function uploadSingleImage($iamge);
-    public function uploadMultiImage($iamges);
+    public function uploadSingleImage($image);
+    public function uploadMultiImage($images);
 
 }

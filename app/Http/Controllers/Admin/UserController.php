@@ -59,7 +59,7 @@ class UserController extends Controller
         if($request->hasFile('image')){
 
             $imageUrl = $this->imageInterface->uploadSingleImage($request->file('image'));
-            
+
         }
          $user = User::create($request->all());
 
@@ -89,7 +89,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        
+
         $roles = Role::all();
 
         return view('Backend.user.create',compact('user', 'roles'));
@@ -105,20 +105,20 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $imageUrl = '';
-        
+
         $user->update($request->all());
-        
+
         if($request->hasFile('image')){
 
             $imageUrl = $this->imageInterface->uploadSingleImage($request->file('image'));
-            
+
             if($user->image){
                 $this->imageInterface->deleteSingleImage($user->image->url);
                 $user->image->delete();
             }
- 
+
         }
-        $user->role_users()->updateOrCreate(["user_id" => $id],["role_id" => $request->role]);
+        $user->role_users()->updateOrCreate(["user_id" => $user],["role_id" => $request->role]);
         if (!$imageUrl == '') {
             $user->image()->create(['url' => $imageUrl]);
          }
@@ -140,7 +140,7 @@ class UserController extends Controller
             $this->imageInterface->deleteSingleImage($user->image->url);
             $user->image->delete();
         }
-        
+
         $user->delete();
         Toastr::Success('User successfully deleted','Success');
         return redirect()->back();

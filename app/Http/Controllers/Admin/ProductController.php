@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use App\Services\Image\ImageInterface;
 use Illuminate\Http\Request;
@@ -18,16 +19,18 @@ class ProductController extends Controller
     public function __construct(ImageInterface $imageInterface) {
         $this->imageInterface = $imageInterface;
     }
-    
+
     public function index(Request $request)
     {
         $tab = $request->tab;
-        
+
         return view('Backend.Product.index', compact('tab'));
     }
 
     public function create()
     {
+
+
         return view('Backend.Product.create');
     }
 
@@ -39,7 +42,7 @@ class ProductController extends Controller
 
         $iamgeUrl = '';
         if ( $request->hasFile('images')) {
-           
+
             $iamgeUrl = $this->imageInterface->uploadMultiImage($request->file('images'));
         }
 
@@ -64,24 +67,44 @@ class ProductController extends Controller
     public function edit(Product $product, Request $request)
     {
         $tab = $request->tab;
-        return view('Backend.Product.create',compact('product', 'tab'));
+        $images = Image::all();
+        return view('Backend.Product.create',compact('product','images','tab'));
     }
 
 
     public function update(Request $request, Product $product)
     {
-        
+        $imageUrl = '';
+
+        if($request->hasFile('images')){
+
+            $imageUrl = $this->imageInterface->uploadMultiImage($request->file('images'));
+
+            if($product->images){
+                $this->imageInterface->deleteMultiImage($product->image->url);
+                $product->image->delete();
+            }
+
+             $product->update($request->all());
+
+            if (!$imageUrl == '') {
+                $product->image()->create(['url' => $imageUrl]);
+             }
+             return redirect()->route('product.index');
+        }
     }
 
 
-    public function destroy(Product $product)
+
+
+   public function destroy(Product $product)
     {
         if($product->image){
             $this->imageInterface->deleteMultiImage($product->image->url);
             $product->image->delete();
         }
         $product->delete();
-        
+
         return redirect()->route('product.index');
     }
 }

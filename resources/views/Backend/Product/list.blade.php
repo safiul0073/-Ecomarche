@@ -19,8 +19,8 @@
                 <tr>
                     <td> {{$key + 1}} </td>
                     <td> {{$product->title}}</td>
-                    <td> {{ $product->category->name }}</td>
-                    <td> {{$product->brand->name }}</td>
+                    <td> {{$product->category_id}}</td>
+                    <td> {{$product->brand_id }}</td>
                     <td> {{Str::limit($product->summary,30)}} </td>
                     <td> {{$product->sku}}</td>
                     <td> {{$product->price}}</td>
@@ -29,6 +29,7 @@
                     <td> {{$product->status == 1 ? 'active' : ''}} </td>
                     <td>
                         <div class="flex">
+                            <a class="" style="color:blanchedalmond;"  href="{{route('product.show',$product->id)}}">show</i></a>
                             <a class="" style="color:blanchedalmond;"  href="{{route('product.edit',$product->id)}}"><i class="fas fa-edit"></i></a>
                             <button class="" style="color:red;" onclick="deleteProduct({{ $product->id }})"><i class="far fa-trash-alt"></i></button>
                             <form id="delete-form-{{ $product->id }}" action="{{route('product.destroy',$product->id)}}" method="POST" style="display: none">

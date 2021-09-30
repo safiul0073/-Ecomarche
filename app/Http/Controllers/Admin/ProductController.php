@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Image;
+=======
+>>>>>>> 8aa7e95035dd78bed8483b7f558397b4c99ae96e
 use App\Models\Product;
 use App\Services\Image\ImageInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -33,7 +35,6 @@ class ProductController extends Controller
 
         return view('Backend.Product.create');
     }
-
 
     public function store(Request $request)
     {

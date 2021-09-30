@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StripeController;
 use App\Jobs\SendMail;
 use App\Mail\SendEmailMailable;
@@ -35,7 +36,7 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('/reset-password',[AdminController::class, 'passwordUpdate'])->name('password.update');
 Route::middleware(['auth'])->group(function () {
-
+    Route::get('edit-image', [ProductController::class, 'editImage'])->name('edit-image');
 
     // Category Section here....
     Route::resource('category', CategoryController::class);
@@ -51,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     // product section here....
     Route::resource('product', ProductController::class);
+
 
 
 

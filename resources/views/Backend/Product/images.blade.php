@@ -5,10 +5,6 @@
                     <tr>
                         <td scope="col">id</td>
                         <td scope="col">images</td>
-
-
-
-
                     </tr>
                 </thead>
 

@@ -29,7 +29,7 @@
                     <td> {{$product->status == 1 ? 'active' : ''}} </td>
                     <td>
                         <div class="flex">
-                            <a class="" style="color:blanchedalmond;"  href="{{route('product.show',$product->id)}}">show</i></a>
+                            <a class="" style="color:blanchedalmond;"  href="{{route('product.show',$product->id)}}"></i></a>
                             <a class="" style="color:blanchedalmond;"  href="{{route('product.edit',$product->id)}}"><i class="fas fa-edit"></i></a>
                             <button class="" style="color:red;" onclick="deleteProduct({{ $product->id }})"><i class="far fa-trash-alt"></i></button>
                             <form id="delete-form-{{ $product->id }}" action="{{route('product.destroy',$product->id)}}" method="POST" style="display: none">

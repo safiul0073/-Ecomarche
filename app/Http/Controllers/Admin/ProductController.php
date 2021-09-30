@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Image;
-=======
->>>>>>> 8aa7e95035dd78bed8483b7f558397b4c99ae96e
 use App\Models\Product;
 use App\Services\Image\ImageInterface;
 use Illuminate\Http\Request;
@@ -76,23 +71,23 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $imageUrl = '';
-
+        // dd($request->all());
         if($request->hasFile('images')){
 
             $imageUrl = $this->imageInterface->uploadMultiImage($request->file('images'));
 
-            if($product->images){
+            if($product->image){
                 $this->imageInterface->deleteMultiImage($product->image->url);
                 $product->image->delete();
             }
-
-             $product->update($request->all());
-
-            if (!$imageUrl == '') {
-                $product->image()->create(['url' => $imageUrl]);
-             }
-             return redirect()->route('product.index');
         }
+
+        $product->update($request->all());
+
+        if (!$imageUrl == '') {
+            $product->image()->create(['url' => $imageUrl]);
+         }
+         return redirect()->route('product.index');
     }
 
 
@@ -107,5 +102,10 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.index');
+    }
+
+
+    public function editImage (Request $request) {
+        
     }
 }

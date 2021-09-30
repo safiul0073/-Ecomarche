@@ -14,4 +14,9 @@ class HomeController extends Controller
     {
         return view('backend.dashboard.index');
     }
+
+    
+    public function editImage (Request $request) {
+        echo "hello";
+    }
 }

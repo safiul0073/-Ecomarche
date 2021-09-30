@@ -147,7 +147,7 @@
                 <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('Content') }}</label>
 
                 <div class="col-md-6">
-                    <textarea name="content" id="" cols="30" rows="2">{{!empty($product) ? $product->content : ''}}</textarea>
+                    <textarea name="content" class="form-control" id="" cols="30" rows="2">{{!empty($product) ? $product->content : ''}}</textarea>
 
                     @error('content')
                         <span class="invalid-feedback" role="alert">

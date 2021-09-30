@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h1 class="text-primary">Category</h1>
             {{-- <a href="{{}}" class="btn btn-outline-primary">Show</a> --}}
         </div>

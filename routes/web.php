@@ -35,8 +35,8 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('/reset-password',[AdminController::class, 'passwordUpdate'])->name('password.update');
 Route::middleware(['auth'])->group(function () {
-    
-        
+
+
     // Category Section here....
     Route::resource('category', CategoryController::class);
     //brand section here......
@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     // product section here....
     Route::resource('product', ProductController::class);
+
+
 
 
 

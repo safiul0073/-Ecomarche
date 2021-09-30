@@ -3,7 +3,11 @@
 
     <div class="card-body">
         <form method="POST" action="{{!empty($product) ? route('product.update',$product->id) : route('product.store')}}" enctype="multipart/form-data">
+            @if (!empty($product))
+                @method('PUT')
+            @endif
             @csrf
+
 
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
@@ -25,8 +29,12 @@
                 <div class="col-md-6">
                     <select class="form-control" name="category_id" id="">
                         @foreach ($categorys as $category)
+                            @if (!empty($product->category) && $product->category->category_id == $category->id)
+                            <option selected value="{{$category->id}}">{{$category->name}}</option>
+                            @else
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endif
 
-                         <option value="{{$category->id}}">{{$category->name}}</option>
 
                         @endforeach
 
@@ -87,6 +95,8 @@
                     <div id="image-preview">
 
                     </div>
+
+
                 </div>
             </div>
 

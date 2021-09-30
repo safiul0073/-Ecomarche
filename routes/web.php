@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\StripeController;
 use App\Jobs\SendMail;
@@ -73,8 +74,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/check-out', [CheckOutController::class, 'checkout'])->name('checkout');
     Route::get('/payment', [CheckOutController::class, 'payment'])->name('payment');
     Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+    
 
+
+    // live chat route list here....
+    Route::get('/chat', [ChatsController::class,'index']);
+    Route::get('messages', [ChatsController::class,'fetchMessages']);
+    Route::post('messages', [ChatsController::class,'sendMessage']);
 });
+
 
 
 
